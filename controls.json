@@ -3,6 +3,11 @@
         "W": "up",
         "A": "left",
         "S": "down",
-        "D": "right"
+        "D": "right",
+        "UpArrow": "up2",
+        "LeftArrow": "left2",
+        "DownArrow": "down2",
+        "RightArrow": "right2",
+        "E": "interact"
     }
 }
