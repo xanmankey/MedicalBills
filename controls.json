@@ -1,0 +1,8 @@
+{
+    "Controls": {
+        "W": "up",
+        "A": "left",
+        "S": "down",
+        "D": "right"
+    }
+}

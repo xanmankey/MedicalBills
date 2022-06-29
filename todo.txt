@@ -1,0 +1,9 @@
+1. Finalize assets + animations, sound effects, and music (need to re-edit the main theme)
+2. Discuss/Agree on core gameplay + theming
+3. Learn Godot + research
+    * Scene transitions?
+    * Lighting? Camera?
+    * Associating scripts with an object?
+    * GDScript?
+    * Mouse controls?
+    * Cooperative Godot practices?
