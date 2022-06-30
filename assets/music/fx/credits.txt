@@ -1,4 +1,4 @@
-Air hiss: jofae (have to extend accordingly for adaptive)
+Air hiss: jofae
 Clock tick: straget
 Sorting papers: keweldog
 Car starting: https://www.youtube.com/watch?v=8ZaP_XsGC3Y
@@ -14,3 +14,4 @@ Door2: CoolKT11
 Small padlock opening: Ruddmer_Rotteveel
 Cart roll: Superex1110
 Hospital background noise: Airborne80
+Cash register (kaching): https://www.youtube.com/watch?v=4kVTqUxJYBA
