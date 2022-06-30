@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r10" pixel_mode="1">
+    <folder id="0">
+        <file id="0" name="motor1.png" width="52" height="17" pivot_x="0" pivot_y="1"/>
+        <file id="1" name="motor3.png" width="102" height="26" pivot_x="0" pivot_y="1"/>
+        <file id="2" name="motor2.png" width="75" height="9" pivot_x="0" pivot_y="1"/>
+    </folder>
+    <entity id="0" name="entity_000">
+        <obj_info name="bone_000" type="bone" w="76.3019" h="10"/>
+        <animation id="0" name="NewAnimation" length="1000" interval="100" looping="false">
+            <mainline>
+                <key id="0">
+                    <bone_ref id="0" timeline="3" key="0"/>
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="2" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="1" key="0" z_index="2"/>
+                </key>
+                <key id="1" time="250">
+                    <bone_ref id="0" timeline="3" key="1"/>
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="2" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="1" key="1" z_index="2"/>
+                </key>
+                <key id="2" time="500">
+                    <bone_ref id="0" timeline="3" key="2"/>
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="2" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="1" key="1" z_index="2"/>
+                </key>
+                <key id="3" time="750">
+                    <bone_ref id="0" timeline="3" key="3"/>
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="2" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="1" key="1" z_index="2"/>
+                </key>
+                <key id="4" time="1000">
+                    <bone_ref id="0" timeline="3" key="4"/>
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" parent="0" timeline="2" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="1" key="1" z_index="2"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="motor1">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="-25" y="7"/>
+                </key>
+                <key id="1" time="250" spin="0">
+                    <object folder="0" file="0" x="-25" y="7"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="motor3">
+                <key id="0" spin="0">
+                    <object folder="0" file="1" x="-50" y="13"/>
+                </key>
+                <key id="1" time="250" spin="0">
+                    <object folder="0" file="1" x="-50" y="13"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="motor2">
+                <key id="0" spin="0">
+                    <object folder="0" file="2" x="1" y="4" angle="0.205729"/>
+                </key>
+                <key id="1" time="250" spin="0">
+                    <object folder="0" file="2" x="1" y="4" angle="0.205729"/>
+                </key>
+            </timeline>
+            <timeline id="3" obj="0" name="bone_000" object_type="bone">
+                <key id="0" spin="-1">
+                    <bone x="-29" y="-1" angle="359.794271"/>
+                </key>
+                <key id="1" time="250">
+                    <bone x="-35" y="-1" angle="354.676936"/>
+                </key>
+                <key id="2" time="500">
+                    <bone x="-44" y="-1" angle="0"/>
+                </key>
+                <key id="3" time="750" spin="-1">
+                    <bone x="-36" y="-1" angle="5.189831"/>
+                </key>
+                <key id="4" time="1000">
+                    <bone x="-29" y="-1" angle="359.793"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
