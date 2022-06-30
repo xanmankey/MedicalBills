@@ -1,7 +1,21 @@
-Cutting wire
-Opening cabinet
-Hospital sounds (need a way to muffle hospital sounds when not in the hallway)
-Moving safe/etch-n-sketch
-Entering on keypad/pressing button
+MOTOR
+Pressure sounds
+Clock sounds (only in minigame; no proximity-based)
+Sorting/sifting through papers
 Quiet motor sounds
-Opening door w/ key
+
+FLASHLIGHT
+Entering on keypad/pressing button
+etch-n-sketch
+Cutting wire
+Lights off; panicked sounds, people stop moving
+
+BOTH
+Ball sliding (hospital ball toy)
+Opening cabinet
+Door opened (used again for padlock and connecting motor)
+Cart/bed rolling
+Hospital sounds (need a way to muffle hospital sounds when not in the hallway)
+Keycard accepted
+
+GAME LOGO
