@@ -5,17 +5,16 @@ Sorting/sifting through papers
 Quiet motor sounds
 
 FLASHLIGHT
-Entering on keypad/pressing button
 etch-n-sketch
 Cutting wire
-Lights off; panicked sounds, people stop moving
+Lights off (switch) 
+Panicked sounds
 
 BOTH
+Entering on keypad/pressing button/Keycard accepted
 Ball sliding (hospital ball toy)
-Opening cabinet
-Door opened (used again for padlock and connecting motor)
+Opening cabinet/door
+Door opened + motor connected (layered w/ car starting)
+Padlock
 Cart/bed rolling
-Hospital sounds (need a way to muffle hospital sounds when not in the hallway)
-Keycard accepted
-
-GAME LOGO
+Hospital sounds (muffled, sounds only in hallway I think)

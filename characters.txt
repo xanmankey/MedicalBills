@@ -34,4 +34,5 @@ Doors
 Floor/Lights/Tiling/The hospital itself
 Cabinet w/ one slightly open and full of papers
 
+GAME LOGO
 AND PROBABLY MANY MORE
