@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/cart-rolling.mp3-253f7b62ed5c2d0b0c459530a2bb50ba.mp3str"
+
+[deps]
+
+source_file="res://assets/music/fx/cart-rolling.mp3"
+dest_files=[ "res://import/cart-rolling.mp3-253f7b62ed5c2d0b0c459530a2bb50ba.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

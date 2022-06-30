@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/SunsetCafe.mp3-0921925aaad793c1d591c57ceae0054b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/music/SunsetCafe.mp3"
+dest_files=[ "res://import/SunsetCafe.mp3-0921925aaad793c1d591c57ceae0054b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

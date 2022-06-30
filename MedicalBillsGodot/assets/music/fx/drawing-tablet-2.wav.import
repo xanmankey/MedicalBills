@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://import/drawing-tablet-2.wav-b4da736df43b66277e16021a573e5120.sample"
+
+[deps]
+
+source_file="res://assets/music/fx/drawing-tablet-2.wav"
+dest_files=[ "res://import/drawing-tablet-2.wav-b4da736df43b66277e16021a573e5120.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

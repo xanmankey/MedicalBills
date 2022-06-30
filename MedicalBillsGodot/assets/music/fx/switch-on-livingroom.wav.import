@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://import/switch-on-livingroom.wav-15ce06a21f93e3174d1728247fec7334.sample"
+
+[deps]
+
+source_file="res://assets/music/fx/switch-on-livingroom.wav"
+dest_files=[ "res://import/switch-on-livingroom.wav-15ce06a21f93e3174d1728247fec7334.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
