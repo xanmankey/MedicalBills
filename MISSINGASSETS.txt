@@ -1,0 +1,6 @@
+Currently we have a decent amount of assets, but none of it is animated (there's some stated stuff, but 
+some things require more complex animation). 
+Additionally, there's definitely still some missing assets, for ex:
+*Security guards
+*A light box (and an open light box with wires to cut, preferably in a red, green, yellow configuration, but the tablet
+can be changed accordingly)

@@ -8,6 +8,8 @@
         "LeftArrow": "left2",
         "DownArrow": "down2",
         "RightArrow": "right2",
-        "E": "interact"
+        "E": "interact",
+        "R": "zoom in",
+        "T": "zoom out"
     }
 }

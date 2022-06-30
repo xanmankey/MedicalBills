@@ -6,15 +6,14 @@ Nurse
 Doctor
 Nurse/Doctor + person being pushed on hospital cart
 Security guards
-Couple different injured people assets
 
 OBJECTS (interactable)
-Defibrillator
 Pressure guage
 Hospital beds
 Padlock
 Crossword puzzle
 Hospital discharge form
+Random papers
 Clock
 TV Guide
 Note on clipboard (for pressure guage)
@@ -22,7 +21,7 @@ Etch-n-sketch
 Safe
 Light box/wires for cutting lights
 Interactable Keypad
-Stated buttons
+Stated buttons (red and green)
 
 OBJECTS (static)
 Motor
@@ -33,6 +32,7 @@ UI Progress bar/Timer
 Doors
 Floor/Lights/Tiling/The hospital itself
 Cabinet w/ one slightly open and full of papers
+Textbox? For tutorial? / hint text (not sure the best way to handle this; maybe godot does?)
 
 GAME LOGO
 AND PROBABLY MANY MORE

@@ -43,7 +43,7 @@
                 <mxCell id="28" value="" style="edgeStyle=none;html=1;fontColor=#000000;" parent="1" source="17" target="27" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="&lt;span style=&quot;color: rgb(13 , 13 , 13)&quot;&gt;Use the pressure number on note and mash to get the pressure gauge up =&amp;gt; gives you P1 dir&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                <mxCell id="17" value="&lt;span style=&quot;color: rgb(13 , 13 , 13)&quot;&gt;Mash to get the pressure gauge up =&amp;gt; gives you padlock key&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
                     <mxGeometry x="200" y="110" width="120" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="24" value="" style="edgeStyle=none;html=1;fontColor=#000000;" parent="1" source="20" target="23" edge="1">
@@ -69,13 +69,13 @@
                 <mxCell id="31" value="" style="edgeStyle=none;html=1;fontColor=#0D0D0D;" parent="1" source="27" target="30" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="27" value="&lt;font color=&quot;#0d0d0d&quot;&gt;Set the clock using the time from the hospital discharge form =&amp;gt; gives you P2 dir&lt;/font&gt;" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                <mxCell id="27" value="&lt;font color=&quot;#0d0d0d&quot;&gt;Set the clock using the time from the hospital discharge form =&amp;gt; gives you 2nd padlock key&lt;/font&gt;" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
                     <mxGeometry x="200" y="190" width="120" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="34" value="" style="edgeStyle=none;html=1;fontColor=#0D0D0D;" parent="1" source="30" target="33" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="&lt;span style=&quot;color: rgb(13 , 13 , 13)&quot;&gt;Open the slightly open cabinet and sift through the papers =&amp;gt; one paper says P3 dir&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+                <mxCell id="30" value="&lt;span style=&quot;color: rgb(13 , 13 , 13)&quot;&gt;Open the slightly open cabinet and sift through the papers =&amp;gt; third padlock key buried underneath&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
                     <mxGeometry x="200" y="270" width="120" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="&lt;span style=&quot;color: rgb(13 , 13 , 13)&quot;&gt;Solve up-down-left-right (only 3) padlock&lt;/span&gt;" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
