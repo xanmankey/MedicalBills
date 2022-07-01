@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/sortingpapers.mp3-45f1b73b2d59e588400a4d5c449b6036.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/fx/sortingpapers.mp3"
+dest_files=[ "res://import/sortingpapers.mp3-45f1b73b2d59e588400a4d5c449b6036.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

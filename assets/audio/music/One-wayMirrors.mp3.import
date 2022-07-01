@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/One-wayMirrors.mp3-4bde9a065c80a8d55aac284ecd1d422b.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/One-wayMirrors.mp3"
+dest_files=[ "res://import/One-wayMirrors.mp3-4bde9a065c80a8d55aac284ecd1d422b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

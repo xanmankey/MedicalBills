@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/DarkCircusMainLoop.mp3-3775d61f1a1d4df6d2491f07a8226990.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/DarkCircusMainLoop.mp3"
+dest_files=[ "res://import/DarkCircusMainLoop.mp3-3775d61f1a1d4df6d2491f07a8226990.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

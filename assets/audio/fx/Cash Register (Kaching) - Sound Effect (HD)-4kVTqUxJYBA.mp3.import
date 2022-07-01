@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/Cash Register (Kaching) - Sound Effect (HD)-4kVTqUxJYBA.mp3-80c1358944c75d66dbe8d702aedce445.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/fx/Cash Register (Kaching) - Sound Effect (HD)-4kVTqUxJYBA.mp3"
+dest_files=[ "res://import/Cash Register (Kaching) - Sound Effect (HD)-4kVTqUxJYBA.mp3-80c1358944c75d66dbe8d702aedce445.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

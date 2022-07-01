@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/hospital-background.mp3-be350d5e58f912b36d3c86893b12a663.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/fx/hospital-background.mp3"
+dest_files=[ "res://import/hospital-background.mp3-be350d5e58f912b36d3c86893b12a663.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

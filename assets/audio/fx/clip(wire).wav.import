@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://import/clip(wire).wav-831f833a9e008cc563ef8f85084680f8.sample"
+
+[deps]
+
+source_file="res://assets/audio/fx/clip(wire).wav"
+dest_files=[ "res://import/clip(wire).wav-831f833a9e008cc563ef8f85084680f8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

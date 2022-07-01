@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/airhiss.mp3-cbd2f89b1c0d1a7984c7914b0488e4d9.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/fx/airhiss.mp3"
+dest_files=[ "res://import/airhiss.mp3-cbd2f89b1c0d1a7984c7914b0488e4d9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
