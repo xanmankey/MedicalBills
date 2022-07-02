@@ -1,3 +1,110 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/art/ui/FlatUI/kenneyUI.tres" type="Theme" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends CanvasLayer
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Title_pressed():
+	pass # Replace with function body.
+
+
+func _on_Retry_pressed():
+	pass # Replace with function body.
+"
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+# Button 2: avigates to the first gameplay scene, the ROOM
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+# onready var button : Button = get_node(\"Start\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	# Connecting the button object to call the _button_pressed function 
+	# on a \"pressed\" signal event
+	return
+
+func _button_pressed() -> void:
+	# Simple syntax for changing scenes; removes the current nodes
+	# and draws the nodes of the new scene
+	print(\"button pressed calls\")
+	get_tree().change_scene(\"res://scenes/TutorialRoom.tscn\")
+"
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Button
+# Button 1: navigates to an alternatie version of the hospital (trimmed down), specifically 
+# a trimmed down ROOM scene
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+# onready var button : Button = get_node(\"Tutorial\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	# Connecting the button object to call the _button_pressed function 
+	# on a \"pressed\" signal event
+	return
+
+func _button_pressed() -> void:
+	# Simple syntax for changing scenes; removes the current nodes
+	# and draws the nodes of the new scene
+	get_tree().change_scene(\"res://scenes/TutorialRoom.tscn\")
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
 
 [node name="Node2D" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="Title" type="Button" parent="."]
+material = SubResource( 2 )
+margin_left = 561.0
+margin_top = 391.0
+margin_right = 763.0
+margin_bottom = 498.0
+theme = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Title Screen"
+script = SubResource( 3 )
+
+[node name="Retry" type="Button" parent="."]
+material = SubResource( 2 )
+margin_left = 186.0
+margin_top = 392.0
+margin_right = 388.0
+margin_bottom = 499.0
+theme = ExtResource( 1 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Retry"
+script = SubResource( 4 )
+
+[connection signal="pressed" from="Title" to="." method="_on_Title_pressed"]
+[connection signal="pressed" from="Retry" to="." method="_on_Retry_pressed"]

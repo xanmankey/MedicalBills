@@ -1,0 +1,40 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/CartRoom.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Hallway3.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Hallway2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Room.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Hallway1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/TutorialHallway2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/LightRoom.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/TutorialHallway3.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/TutorialHallway1.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/MotorRoom.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/TutorialRoom.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=15]
+
+[node name="SceneSwitcher" type="Node"]
+
+[node name="Hallway1" parent="." instance=ExtResource( 8 )]
+
+[node name="Hallway2" parent="." instance=ExtResource( 6 )]
+
+[node name="Hallway3" parent="." instance=ExtResource( 4 )]
+
+[node name="Room" parent="." instance=ExtResource( 7 )]
+
+[node name="TutorialHallway1" parent="." instance=ExtResource( 12 )]
+
+[node name="TutorialHallway2" parent="." instance=ExtResource( 9 )]
+
+[node name="TutorialHallway3" parent="." instance=ExtResource( 11 )]
+
+[node name="TutorialRoom" parent="." instance=ExtResource( 14 )]
+
+[node name="UI" parent="." instance=ExtResource( 15 )]
+
+[node name="CartRoom" parent="." instance=ExtResource( 2 )]
+
+[node name="LightRoom" parent="." instance=ExtResource( 10 )]
+
+[node name="MotorRoom" parent="." instance=ExtResource( 13 )]

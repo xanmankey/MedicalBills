@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/art/static/WhiteBackground.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/static/money.png" type="Texture" id=2]
@@ -6,6 +6,35 @@
 [ext_resource path="res://assets/art/fonts/comic-sans-ms/COMIC.TTF" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/art/static/FirstAidCross.png" type="Texture" id=5]
 [ext_resource path="res://assets/art/ui/FlatUI/kenneyUI.tres" type="Theme" id=6]
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends CanvasLayer
+
+signal level_changed
+export (String) var level_name = \"level\"
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Start_pressed():
+	emit_signal(\"level_changed\", level_name)
+
+
+
+func _on_Tutorial_pressed():
+	emit_signal(\"level_changed\", level_name)
+"
 
 [sub_resource type="DynamicFont" id=2]
 size = 34
@@ -20,16 +49,19 @@ script/source = "extends Button
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
-
+# onready var button : Button = get_node(\"Start\")
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _ready() -> void:
+	# Connecting the button object to call the _button_pressed function 
+	# on a \"pressed\" signal event
+	return
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _button_pressed() -> void:
+	# Simple syntax for changing scenes; removes the current nodes
+	# and draws the nodes of the new scene
+	print(\"button pressed calls\")
+	get_tree().change_scene(\"res://scenes/TutorialRoom.tscn\")
 "
 
 [sub_resource type="GDScript" id=4]
@@ -37,25 +69,21 @@ script/source = "extends Button
 # Button 1: navigates to an alternatie version of the hospital (trimmed down), specifically 
 # a trimmed down ROOM scene
 
-var button
-
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+# onready var button : Button = get_node(\"Tutorial\")
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	var button = Button.new()
+func _ready() -> void:
 	# Connecting the button object to call the _button_pressed function 
 	# on a \"pressed\" signal event
-	button.connect(\"pressed\", self, \"_button_pressed\")
-	button.connect(\"mouse_entered\", self, \"_button_hover\")
-	
+	return
 
-func _button_pressed():
+func _button_pressed() -> void:
 	# Simple syntax for changing scenes; removes the current nodes
 	# and draws the nodes of the new scene
 	get_tree().change_scene(\"res://scenes/TutorialRoom.tscn\")
-
-func _button_hover(Button button):
-	button.hover = 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -63,6 +91,7 @@ func _button_hover(Button button):
 "
 
 [node name="Node2D" type="Node2D"]
+script = SubResource( 5 )
 
 [node name="WhiteBackground" type="Sprite" parent="."]
 position = Vector2( 510, 300 )
@@ -92,7 +121,7 @@ position = Vector2( 476, 447 )
 scale = Vector2( 1, 1.57735 )
 texture = ExtResource( 5 )
 
-[node name="Button2" type="Button" parent="."]
+[node name="Start" type="Button" parent="."]
 material = SubResource( 1 )
 margin_left = 561.0
 margin_top = 391.0
@@ -104,7 +133,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Start"
 script = SubResource( 3 )
 
-[node name="Button" type="Button" parent="."]
+[node name="Tutorial" type="Button" parent="."]
 material = SubResource( 1 )
 margin_left = 186.0
 margin_top = 392.0
@@ -115,3 +144,6 @@ custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Tutorial"
 script = SubResource( 4 )
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Tutorial" to="." method="_on_Tutorial_pressed"]
