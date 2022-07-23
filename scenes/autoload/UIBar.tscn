@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/autoload/UIBar.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/ui/UICross.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/ui/UIBar.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+
+[sub_resource type="Animation" id=2]
+resource_name = "progress_bar"
+length = 200.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("UiCross:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 200 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 414, 555 ), Vector2( 600, 555 ) ]
+}
+
+[node name="UIBar" type="CanvasLayer"]
+script = ExtResource( 1 )
+scene_type = "ending"
+
+[node name="UiBar" type="Sprite" parent="."]
+position = Vector2( 504, 552 )
+texture = ExtResource( 3 )
+
+[node name="UiCross" type="Sprite" parent="."]
+position = Vector2( 414, 555 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/progress_bar = SubResource( 2 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

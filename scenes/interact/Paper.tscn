@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/art/interactive/interactive/written_paper_no_backgroundFLIPPED.png" type="Texture" id=1]
+[ext_resource path="res://scenes/interact/Paper.gd" type="Script" id=2]
+[ext_resource path="res://scenes/interact/FSDischarge.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25, 17.5 )
+
+[node name="Paper" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FSDischarge" parent="CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 305, 283.5 )
+shape = SubResource( 1 )
+
+[node name="WrittenPaperNoBackgroundFlipped" type="Sprite" parent="Area2D"]
+position = Vector2( 305, 276 )
+texture = ExtResource( 1 )
+
+[connection signal="popup_hide" from="CanvasLayer/FSDischarge" to="." method="_on_FSDischarge_popup_hide"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

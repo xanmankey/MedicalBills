@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/art/interactive/interactive/written_paper_no_backgroundFLIPPED.png" type="Texture" id=1]
+[ext_resource path="res://scenes/interact/FSTVGuide.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/interact/TVGuidePaper.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50, 75 )
+
+[node name="TVGuidePaper" type="Node2D"]
+position = Vector2( -595, 225 )
+scale = Vector2( 0.2, 0.2 )
+script = ExtResource( 3 )
+
+[node name="TVGuide" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 300, 301 )
+scale = Vector2( 0.999999, 0.999999 )
+shape = SubResource( 1 )
+
+[node name="WrittenPaperNoBackgroundFlipped" type="Sprite" parent="Area2D"]
+position = Vector2( 305, 276 )
+texture = ExtResource( 1 )
+
+[connection signal="popup_hide" from="TVGuide" to="." method="_on_TVGuide_popup_hide"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

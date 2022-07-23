@@ -1,3 +1,267 @@
-[gd_scene format=2]
+[gd_scene load_steps=45 format=2]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource path="res://assets/art/decorative/decorative2.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/art/textures/Floor.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/art/textures/Walls.tres" type="TileSet" id=4]
+[ext_resource path="res://scenes/demo/DoorSimple.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/interact/Clocks.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Room.gd" type="Script" id=7]
+[ext_resource path="res://scenes/interact/TVGuidePaper.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/interact/ButtonRollyBed.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/interact/BallToy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/art/decorative/decorative/Table.png" type="Texture" id=11]
+[ext_resource path="res://scenes/interact/NumberSafe2.gd" type="Script" id=12]
+[ext_resource path="res://scenes/pickup/Ball.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/interact/HospitalCurtains.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/art/decorative/decorative/blueBed.png" type="Texture" id=15]
+[ext_resource path="res://scenes/interact/Pressure.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/art/interactive/interactive/safe.png" type="Texture" id=17]
+[ext_resource path="res://assets/art/interactive/numbers/Numbers 7x10.png" type="Texture" id=18]
+[ext_resource path="res://scenes/interact/CrosswordPaper.tscn" type="PackedScene" id=19]
+[ext_resource path="res://scenes/interact/DoorLock.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/interact/PadlockedMotor.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/interact/ButtonSafe.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/pickup/PadlockKeys.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/interact/OpenCabinet.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/interact/FSNumberSafe.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/interact/Tablet.tscn" type="PackedScene" id=26]
+[ext_resource path="res://scenes/pickup/DoorKey.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/characters/Player+Bed.tscn" type="PackedScene" id=28]
+[ext_resource path="res://assets/art/interactive/interactive/safeWithoutFlashlight.png" type="Texture" id=29]
+[ext_resource path="res://scenes/interact/NumberSafe.tscn" type="PackedScene" id=31]
+[ext_resource path="res://scenes/interact/Paper.tscn" type="PackedScene" id=32]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 18 )
+region = Rect2( 7, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 18 )
+region = Rect2( 14, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 18 )
+region = Rect2( 21, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 18 )
+region = Rect2( 28, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 18 )
+region = Rect2( 35, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 18 )
+region = Rect2( 42, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 18 )
+region = Rect2( 49, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 18 )
+region = Rect2( 56, 0, 7, 10 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 18 )
+region = Rect2( 63, 0, 7, 10 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "change_num",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 52.5, 47.5 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 27, 28 )
+
+[node name="Room" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="Floor" type="TileMap" parent="."]
+position = Vector2( 0, -1 )
+z_index = -1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 40, 40 )
+cell_quadrant_size = 32
+format = 1
+tile_data = PoolIntArray( 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 65553, 0, 0, 65554, 0, 0, 65555, 0, 0, 65556, 0, 0, 65557, 0, 0, 65558, 0, 0, 65559, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131087, 0, 0, 131088, 0, 0, 131089, 0, 0, 131090, 0, 0, 131091, 0, 0, 131092, 0, 0, 131093, 0, 0, 131094, 0, 0, 131095, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 196627, 0, 0, 196628, 0, 0, 196629, 0, 0, 196630, 0, 0, 196631, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 262163, 0, 0, 262164, 0, 0, 262165, 0, 0, 262166, 0, 0, 262167, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 327701, 0, 0, 327702, 0, 0, 327703, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 393233, 0, 0, 393234, 0, 0, 393235, 0, 0, 393236, 0, 0, 393237, 0, 0, 393238, 0, 0, 393239, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 458771, 0, 0, 458772, 0, 0, 458773, 0, 0, 458774, 0, 0, 458775, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 524305, 0, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 589842, 0, 0, 589843, 0, 0, 589844, 0, 0, 589845, 0, 0, 589846, 0, 0, 589847, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0, 655381, 0, 0, 655382, 0, 0, 655383, 0, 0, 720897, 0, 0, 720898, 0, 0, 720899, 0, 0, 720900, 0, 0, 720901, 0, 0, 720902, 0, 0, 720903, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 720912, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 720916, 0, 0, 720917, 0, 0, 720918, 0, 0, 720919, 0, 0, 786433, 0, 0, 786434, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 786452, 0, 0, 786453, 0, 0, 786454, 0, 0, 786455, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Walls" type="TileMap" parent="."]
+z_index = -1
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 40, 40 )
+show_collision = true
+collision_layer = 2
+collision_mask = 3
+format = 1
+tile_data = PoolIntArray( 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 7, 9, 0, 8, 9, 0, 9, 9, 0, 10, 9, 0, 11, 9, 0, 12, 9, 0, 13, 9, 0, 14, 9, 0, 15, 9, 0, 16, 9, 0, 17, 9, 0, 18, 9, 0, 19, 9, 0, 20, 9, 0, 21, 9, 0, 22, 9, 0, 23, 9, 0, 24, 9, 0, 25, 9, 0, 65536, 9, 0, 65537, 9, 0, 65538, 9, 0, 65539, 9, 0, 65540, 9, 0, 65541, 9, 0, 65542, 9, 0, 65543, 9, 0, 65544, 9, 0, 65545, 9, 0, 65546, 9, 0, 65547, 9, 0, 65548, 9, 0, 65549, 9, 0, 65550, 9, 0, 65551, 9, 0, 65552, 9, 0, 65553, 9, 0, 65554, 9, 0, 65555, 9, 0, 65556, 9, 0, 65557, 9, 0, 65558, 9, 0, 65559, 9, 0, 65560, 9, 0, 65561, 9, 0, 131072, 9, 0, 131073, 9, 0, 131096, 9, 0, 131097, 9, 0, 196608, 9, 0, 196609, 9, 0, 196632, 9, 0, 196633, 9, 0, 262144, 9, 0, 262145, 9, 0, 262168, 9, 0, 262169, 9, 0, 327680, 9, 0, 327681, 9, 0, 327704, 9, 0, 327705, 9, 0, 393216, 9, 0, 393217, 9, 0, 393240, 9, 0, 393241, 9, 0, 458752, 9, 0, 458753, 9, 0, 458776, 9, 0, 458777, 9, 0, 524288, 9, 0, 524289, 9, 0, 524312, 9, 0, 524313, 9, 0, 589824, 9, 0, 589825, 9, 0, 589848, 9, 0, 589849, 9, 0, 655360, 9, 0, 655361, 9, 0, 655384, 9, 0, 655385, 9, 0, 720896, 9, 0, 720897, 9, 0, 720920, 9, 0, 720921, 9, 0, 786432, 9, 0, 786433, 9, 0, 786456, 9, 0, 786457, 9, 0, 851968, 9, 0, 851969, 9, 0, 851970, 9, 0, 851971, 9, 0, 851972, 9, 0, 851973, 9, 0, 851974, 9, 0, 851975, 9, 0, 851976, 9, 0, 851977, 9, 0, 851978, 9, 0, 851979, 9, 0, 851980, 9, 0, 851981, 9, 0, 851982, 9, 0, 851983, 9, 0, 851984, 9, 0, 851985, 9, 0, 851986, 9, 0, 851987, 9, 0, 851988, 9, 0, 851989, 9, 0, 851990, 9, 0, 851991, 9, 0, 851992, 9, 0, 851993, 9, 0, 917504, 9, 0, 917505, 9, 0, 917506, 9, 0, 917507, 9, 0, 917508, 9, 0, 917509, 9, 0, 917510, 9, 0, 917511, 9, 0, 917512, 9, 0, 917513, 9, 0, 917514, 9, 0, 917515, 9, 0, 917516, 9, 0, 917517, 9, 0, 917518, 9, 0, 917519, 9, 0, 917520, 9, 0, 917521, 9, 0, 917522, 9, 0, 917523, 9, 0, 917524, 9, 0, 917525, 9, 0, 917526, 9, 0, 917527, 9, 0, 917528, 9, 0, 917529, 9, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Decorative" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+show_collision = true
+format = 1
+tile_data = PoolIntArray( -131068, 57, 0, -131062, 42, 0, 2, 106, 0, 6, 31, 0, 7, 35, 0, 65543, 32, 0, 655360, 5, 0, 720896, 5, 0, 720921, 13, 0, 786432, 5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 515, 305 )
+
+[node name="PlayerBed" parent="." instance=ExtResource( 28 )]
+position = Vector2( 515, 310 )
+
+[node name="Clocks" parent="." instance=ExtResource( 6 )]
+position = Vector2( 105, -135 )
+
+[node name="ClocksPaper" parent="Clocks" instance=ExtResource( 32 )]
+position = Vector2( 195, 65 )
+
+[node name="BallToyTable" type="Sprite" parent="."]
+position = Vector2( 152, 330 )
+rotation = -1.57079
+texture = ExtResource( 11 )
+flip_v = true
+
+[node name="BallToy" parent="BallToyTable" instance=ExtResource( 10 )]
+position = Vector2( -55, -46 )
+
+[node name="Ball" parent="." instance=ExtResource( 13 )]
+position = Vector2( 250, 220 )
+
+[node name="RoomDoor" parent="." instance=ExtResource( 5 )]
+position = Vector2( 520, 60 )
+
+[node name="DoorLock" parent="RoomDoor" instance=ExtResource( 20 )]
+position = Vector2( -85, -142.5 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Position2D" type="Position2D" parent="RoomDoor"]
+position = Vector2( 0, 25.5 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="HospitalCurtains" parent="." instance=ExtResource( 14 )]
+position = Vector2( 805, 155 )
+
+[node name="PressureGuage" parent="HospitalCurtains" instance=ExtResource( 16 )]
+position = Vector2( -220, 95 )
+
+[node name="BlueBed" type="Sprite" parent="HospitalCurtains"]
+position = Vector2( 140, 290 )
+texture = ExtResource( 15 )
+
+[node name="PadlockKey" parent="HospitalCurtains" instance=ExtResource( 23 )]
+position = Vector2( -250, 145 )
+
+[node name="DoorKey" parent="." instance=ExtResource( 27 )]
+position = Vector2( -175, -90 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="LockedMotor" parent="DoorKey" instance=ExtResource( 21 )]
+position = Vector2( 183.333, 33.3333 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="ButtonSafe" parent="." instance=ExtResource( 22 )]
+position = Vector2( 115, 55 )
+
+[node name="DoorKey" parent="ButtonSafe" instance=ExtResource( 27 )]
+position = Vector2( -220, -150 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="ButtonRollyBed" parent="." instance=ExtResource( 9 )]
+position = Vector2( 109, 970 )
+rotation = -1.5708
+
+[node name="OpenCabinet" parent="." instance=ExtResource( 24 )]
+position = Vector2( 770, 15 )
+
+[node name="PadlockKey2" parent="OpenCabinet" instance=ExtResource( 23 )]
+position = Vector2( -185, -20 )
+
+[node name="NumberSafe" parent="." instance=ExtResource( 31 )]
+position = Vector2( 536, -105 )
+
+[node name="TVGuidePaper" parent="NumberSafe" instance=ExtResource( 8 )]
+position = Vector2( -351, 100 )
+scale = Vector2( 0.4, 0.4 )
+
+[node name="Tablet" parent="." instance=ExtResource( 26 )]
+position = Vector2( 515, 325 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="NumberSafe2" type="Node2D" parent="."]
+position = Vector2( 200, -100 )
+script = ExtResource( 12 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="NumberSafe2"]
+
+[node name="FSNumberSafe" parent="NumberSafe2/CanvasLayer" instance=ExtResource( 25 )]
+margin_left = -1440.0
+margin_top = -1755.0
+margin_right = -1440.0
+margin_bottom = -1755.0
+
+[node name="Area2D" type="Area2D" parent="NumberSafe2"]
+
+[node name="Safe" type="Sprite" parent="NumberSafe2/Area2D"]
+position = Vector2( 215, 195 )
+texture = ExtResource( 17 )
+
+[node name="SafeNum1" type="AnimatedSprite" parent="NumberSafe2/Area2D"]
+position = Vector2( 203, 200 )
+frames = SubResource( 11 )
+animation = "change_num"
+
+[node name="SafeNum2" type="AnimatedSprite" parent="NumberSafe2/Area2D"]
+position = Vector2( 215, 200 )
+frames = SubResource( 11 )
+animation = "change_num"
+
+[node name="SafeNum3" type="AnimatedSprite" parent="NumberSafe2/Area2D"]
+position = Vector2( 227, 200 )
+frames = SubResource( 11 )
+animation = "change_num"
+
+[node name="SafeWithoutFlashlight" type="Sprite" parent="NumberSafe2/Area2D"]
+position = Vector2( 215, 195 )
+texture = ExtResource( 29 )
+
+[node name="CrosswordPaper" parent="NumberSafe2/Area2D" instance=ExtResource( 19 )]
+position = Vector2( -90, -76 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NumberSafe2/Area2D"]
+position = Vector2( 217.5, 192.5 )
+shape = SubResource( 13 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NumberSafe2/Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NumberSafe2/Area2D/StaticBody2D"]
+position = Vector2( 215, 195 )
+shape = SubResource( 12 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 515, 300 )
+current = true
+
+[connection signal="popup_hide" from="NumberSafe2/CanvasLayer/FSNumberSafe" to="NumberSafe2" method="_on_FSNumberSafe_popup_hide"]
+[connection signal="area_entered" from="NumberSafe2/Area2D" to="NumberSafe2" method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="NumberSafe2/Area2D" to="NumberSafe2" method="_on_Area2D_area_exited"]

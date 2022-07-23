@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://import/cash.mp3-89a285d171ec8d808f44df775933b715.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/fx/cash.mp3"
+dest_files=[ "res://import/cash.mp3-89a285d171ec8d808f44df775933b715.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/art/fullscreen/hospitalDischargeWithTime.png" type="Texture" id=1]
+
+[node name="Discharge" type="Popup"]
+
+[node name="HospitalDischargeWithTime" type="Sprite" parent="."]
+position = Vector2( 530, 300 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 1 )

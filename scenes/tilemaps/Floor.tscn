@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/art/textures/textures/backgroundSmall.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/textures/textures/background.png" type="Texture" id=2]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 328, 136 )
+
+[node name="FloorBig" type="Sprite" parent="."]
+position = Vector2( -88, 40 )
+texture = ExtResource( 2 )
+
+[node name="FloorSmall" type="Sprite" parent="."]
+position = Vector2( 32, 120 )
+texture = ExtResource( 1 )

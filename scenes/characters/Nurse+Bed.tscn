@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/art/characters/Nurse+Bed/Front.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/characters/Nurse+Bed/Back.png" type="Texture" id=2]
+[ext_resource path="res://scenes/characters/animations/drive_right.tres" type="Animation" id=3]
+[ext_resource path="res://scenes/characters/animations/drive_left.tres" type="Animation" id=4]
+[ext_resource path="res://scenes/characters/animations/drive_up.tres" type="Animation" id=5]
+[ext_resource path="res://scenes/characters/animations/drive_down.tres" type="Animation" id=6]
+
+[sub_resource type="PhysicsMaterial" id=5]
+bounce = 0.2
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=3]
+height = 30.0
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 22.5, 38.75 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["enemy"]]
+physics_material_override = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+
+[node name="Back" type="Sprite" parent="StaticBody2D/Sprite"]
+position = Vector2( 0, 25 )
+texture = ExtResource( 2 )
+
+[node name="Front" type="Sprite" parent="StaticBody2D/Sprite"]
+position = Vector2( 0, 25 )
+texture = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody2D"]
+root_node = NodePath("../Sprite")
+playback_speed = 1.5
+anims/RESET = SubResource( 1 )
+anims/drive_down = ExtResource( 6 )
+anims/drive_left = ExtResource( 4 )
+anims/drive_right = ExtResource( 3 )
+anims/drive_up = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -4, -15 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D(rect)" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -2.5, 46.25 )
+shape = SubResource( 4 )

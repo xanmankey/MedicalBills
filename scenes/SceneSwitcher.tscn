@@ -1,0 +1,310 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Settings.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Title.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Pause.tscn" type="PackedScene" id=11]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+# The scene switcher also handles initialization, including:
+# doors + keypads or doors + padlocks
+
+# REMEMBER that you only put your default scenes 
+# and scenes that aren't loaded by any OTHER scenes here
+# (see tutorial: https://www.youtube.com/watch?v=XHbrKdsZrxY&t=102s)
+
+# Initial scene vars; onready always calls first
+onready var current_level = $Title
+var next_level = null
+var temp_scenes = \"res://scenes/temp_scenes/\"
+
+# Get reference to animation player
+onready var anim = $SceneTransition
+# onready var ui_bar = $UIBar
+
+# settings node
+onready var settings = $CanvasLayer/Settings
+
+# pause node
+onready var pause = $CanvasLayer/Pause
+
+# Handle audio
+onready var music_player = $Music
+onready var sfx_player = $SFX
+onready var tween = Tween.new()
+
+var animating = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# Remember that the first param is the signal, and the third param is the 
+	# corresponding function.
+	# Also, connect signals IN ready
+	current_level.connect(\"level_changed\", self, \"handle_level_changed\")
+	UIBar.connect(\"level_changed\", self, \"handle_level_changed\")
+	current_level.connect(\"play_audio\", self, \"handle_audio_playback\")
+	# playing audio for first scene
+	handle_audio_playback(\"music\", \"none\", \"SunsetCafe.mp3\")
+	add_child(tween)
+	
+# Currently 4 scene_types planned: to_gameplay (for fading animations), 
+# popup_menu (pause, settings), scene_menu (win, lose), and gameplay scenes. 
+# All scene types need to handled in different manners
+# with an optional player_pos argument
+func handle_level_changed(next_level_name: String, scene_type: String, door=false):
+	# I'm also including handling initial player position in the handle_level_changed function
+	if scene_type == \"settings\":
+		settings.popup()
+	else:
+#		var loaded = false
+		if scene_type == \"gameplay\":
+			# saving a temporary scene
+			\"\"\"
+			var dir = Directory.new()
+			if dir.open(temp_scenes) == OK:
+				# handle saving the previous scene's state
+				var file_path = temp_scenes + current_level.name + \".tscn\"
+				var scene = PackedScene.new()
+				scene.pack(current_level)
+				ResourceSaver.save(file_path, scene)
+				# iterate through and look for new scene file
+				dir.list_dir_begin()
+				var file_name = dir.get_next()
+				while file_name != \"\":
+					print(file_name)
+					if file_name == next_level_name:
+						next_level = load(temp_scenes + next_level_name)
+						loaded = true
+						break
+					file_name = dir.get_next()
+			if not loaded:
+				# Loading the scene
+				next_level = load(\"res://scenes/\" + next_level_name)
+			\"\"\"
+			# Loading the scene
+			next_level = load(\"res://scenes/\" + next_level_name)
+			pause.enable_input()
+		elif scene_type == \"ending\":
+			\"\"\"
+			var dir = Directory.new()
+			if dir.open(temp_scenes) == OK:
+				dir.list_dir_begin()
+				var file_name = dir.get_next()
+				# delete temporary files
+				while file_name != \"\":
+					print(file_name)
+#					dir.remove(temp_scenes + file_name)
+			\"\"\"
+			# Loading the scene
+			next_level = load(\"res://scenes/\" + next_level_name)
+		else:
+			pause.disable_input()
+			# Loading the scene
+			next_level = load(\"res://scenes/\" + next_level_name)
+		\"\"\"
+		match scene_type:
+			'title':
+				next_level.z_axis = -1
+			'static':
+				
+			_:
+				return
+		\"\"\"
+		# Ensure that the new scene is drawn below the animation
+		# <all static scenes are have a Node2D parent node>
+		# next_level.z_index = -1
+		# Instancing the scene/creating an object of it
+		next_level = next_level.instance()
+		if scene_type == \"to_gameplay\":
+			next_level.z_index = -15
+			anim.play(\"Fade in\")
+			add_child(next_level)
+			yield(anim, \"animation_finished\")
+			# Remove the prior scene, and load the next scene
+			current_level.queue_free()
+			current_level = next_level
+			current_level.z_index = 1
+			next_level = null
+			pause.enable_input()
+			GlobalSignals.emit_signal(\"start_ui_timer\")
+		else:
+			add_child(next_level)
+			# Make the scene the frontmost scene
+			current_level.queue_free()
+			current_level = next_level
+		
+		# handle placing player
+		if scene_type == \"gameplay\":
+			if door:
+	#			get_tree().get_current_scene().get(\"current_level\").get_node(\"Player\").position = player_pos
+				# specific because the hallway has multiple doors
+				# (just a simple solution)
+				var player_pos = get_new_player_pos(next_level, door.name)
+				if GlobalVars.current_player.to_lower() == \"player\":
+					current_level.get_node(\"Player\").position = player_pos
+				elif GlobalVars.current_player.to_lower() == \"playerbed\":
+					current_level.get_node(\"PlayerBed\").position = player_pos
+			# enable camera if gameplay
+			if next_level_name == \"Hallway.tscn\":
+				if GlobalVars.current_player.to_lower() == \"player\":
+					# Using tilemaps to denote camera limits
+					var camera = current_level.get_node(\"Player\").get_node(\"KinematicBody2D\").get_node(\"Camera2D\")
+					camera.current = true
+					var map_limits = current_level.get_node(\"Walls\").get_used_rect()
+					var map_cellsize = current_level.get_node(\"Walls\").cell_size
+					camera.limit_left = map_limits.position.x * map_cellsize.x
+					camera.limit_right = map_limits.end.x * map_cellsize.x
+#					$Player/Camera2D.limit_top = map_limits.position.y * map_cellsize.y
+#					$Player/Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y
+	#				current_level.get_node(\"Player\").get_node(\"KinematicBody2D\").get_node(\"Camera2D\").global_position = Vector2(-15, -140)
+				elif GlobalVars.current_player.to_lower() == \"playerbed\":
+					var camera = current_level.get_node(\"PlayerBed\").get_node(\"KinematicBody2D\").get_node(\"Camera2D\")
+					camera.current = true
+					var map_limits = current_level.get_node(\"Walls\").get_used_rect()
+					var map_cellsize = current_level.get_node(\"Walls\").cell_size
+					camera.limit_left = map_limits.position.x * map_cellsize.x
+					camera.limit_right = map_limits.end.x * map_cellsize.x
+	#				current_level.get_node(\"Player\").get_node(\"KinematicBody2D\").get_node(\"Camera2D\").global_position = Vector2(-15, -140)
+			else:
+				if GlobalVars.current_player.to_lower() == \"player\":
+					current_level.get_node(\"Player\").get_node(\"KinematicBody2D\").get_node(\"Camera2D\").current = false
+				elif GlobalVars.current_player.to_lower() == \"playerbed\":
+					current_level.get_node(\"PlayerBed\").get_node(\"Player\").get_node(\"KinematicBody2D\").get_node(\"Camera2D\").current = false
+				
+		# Repurpose the signal to be listened for on the currently loaded level
+		current_level.connect(\"level_changed\", self, \"handle_level_changed\")
+
+func get_new_player_pos(new_scene, door_name):
+	# I need to pass the new_scene so I can get the position of
+	# the position2D nodes
+	match new_scene.name:
+		\"Room\":
+			return new_scene.get_node(\"RoomDoor\").get_node(\"Position2D\").global_position
+		\"Hallway\":
+			match door_name:
+				# position based on the doors of the original rooms
+				# (not the new room)
+				# room
+				# NOTE that the Position2D is actually relative
+				\"RoomDoor\":
+					return new_scene.get_node(\"RoomDoor\").get_node(\"Position2D\").global_position
+				# light room	
+				\"LightRoomDoor\":
+					return new_scene.get_node(\"LightRoomDoor\").get_node(\"Position2D\").global_position
+				# motor room
+				\"MotorRoomDoor\":
+					return new_scene.get_node(\"MotorRoomDoor\").get_node(\"Position2D\").global_position
+				# cart room
+				\"CartRoomDoor\":	
+					return new_scene.get_node(\"CartRoomDoor\").get_node(\"Position2D\").global_position
+		\"CartRoom\":
+			return new_scene.get_node(\"CartRoomDoor\").get_node(\"Position2D\").global_position
+		\"LightRoom\":
+			return new_scene.get_node(\"LightRoomDoor\").get_node(\"Position2D\").global_position
+		\"MotorRoom\":
+			return new_scene.get_node(\"MotorRoomDoor\").get_node(\"Position2D\").global_position
+
+func handle_audio_playback(audio_type, playback_type, audio_name):
+	if audio_type.to_lower() == \"music\":
+		var music = load(\"res://assets/audio/music/\" + audio_name)
+		music.set_loop(true)
+		music_player.stream = music
+		if playback_type == \"fade\": 
+			music_player.play()
+			fade_in(music_player)
+		else:
+			music_player.play()
+	else:
+		var sfx = load(\"res://assets/audio/fx/\" + audio_name)
+		sfx.set_loop(false)
+		sfx_player.stream = sfx
+		if playback_type == \"fade\":
+			sfx_player.play()
+			fade_in(sfx_player)
+		else:
+			music_player.play()
+			
+func fade_in(audio_stream):
+	# tweens are useful ways to streamline animations
+	# (node, property, value 1, value 2, duration, type (1 means wave), curve, other stuff??)
+	tween.interpolate_property(audio_stream, \"volume_db\", -30, 0, 1, 1, Tween.EASE_IN, 0)
+	tween.start()
+
+# for serializing scene data.
+# Unfortunately, I didn't take this into consideration, 
+# so I'm locking all doors (can only be entered once)
+#func save(object_to_save):
+#	# I'm just serializing position, sprite, and vars.
+#	# Stating vars is too difficult for this project, 
+#	# so I might just save a completed boolean, 
+#	# or possibly a 
+#	var save_dict = {
+#		\"filename\" : get_filename(),
+#		\"parent\" : get_parent().get_path(),
+#		\"pos_x\" : position.x, # Vector2 is not supported by JSON
+#		\"pos_y\" : position.y,
+#		\"completed\":
+#	}
+#	return save_dict
+"
+
+[sub_resource type="Animation" id=2]
+resource_name = "Fade in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Fade out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="SceneSwitcher" type="Node"]
+pause_mode = 2
+script = SubResource( 1 )
+
+[node name="Title" parent="." instance=ExtResource( 3 )]
+
+[node name="SceneTransition" type="AnimationPlayer" parent="."]
+"anims/Fade in" = SubResource( 2 )
+"anims/Fade out" = SubResource( 3 )
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+bus = "Music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource( 1 )]
+visible = false
+input_pass_on_modal_close_click = false
+
+[node name="Pause" parent="CanvasLayer" instance=ExtResource( 11 )]

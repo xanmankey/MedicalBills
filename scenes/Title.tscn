@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/art/static/WhiteBackground.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/static/money.png" type="Texture" id=2]
@@ -6,34 +6,40 @@
 [ext_resource path="res://assets/art/fonts/comic-sans-ms/COMIC.TTF" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/art/static/FirstAidCross.png" type="Texture" id=5]
 [ext_resource path="res://assets/art/ui/FlatUI/kenneyUI.tres" type="Theme" id=6]
+[ext_resource path="res://scenes/Settings.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=5]
-script/source = "extends CanvasLayer
+script/source = "extends Node2D
 
 signal level_changed
-export (String) var level_name = \"level\"
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
+signal play_audio
+export (String) var scene_type = \"static\"
+var rng = RandomNumberGenerator.new()
 
+func _ready():
+	# Pause the game on a static menu
+	get_tree().paused = true
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+# the SceneSwitcher SHOULD connect it first, but I'm not sure
 func _on_Start_pressed():
-	emit_signal(\"level_changed\", level_name)
+	# On transition, unpause the game
+	get_tree().paused = false
+	emit_signal(\"level_changed\", \"Room.tscn\", \"to_gameplay\")
+	rng.randomize()
+	var num = rng.randi_range(0, 10)
+	# play music on gameplay starting
+	yield(get_tree().create_timer(0.8), \"timeout\")
+	if num == 0:
+		emit_signal(\"play_audio\", \"music\", \"fade\", \"DarkCircusMainLoop.mp3\")
+	else:
+		emit_signal(\"play_audio\", \"music\", \"fade\", \"One-wayMirrors.mp3\")
 
-
-
-func _on_Tutorial_pressed():
-	emit_signal(\"level_changed\", level_name)
+func _on_Settings_pressed():
+	emit_signal(\"level_changed\", \"Settings.tscn\", \"settings\")
+	
+func _get_scene_type():
+	return scene_type
 "
 
 [sub_resource type="DynamicFont" id=2]
@@ -42,56 +48,10 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="GDScript" id=3]
-script/source = "extends Button
-# Button 2: avigates to the first gameplay scene, the ROOM
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-# onready var button : Button = get_node(\"Start\")
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	# Connecting the button object to call the _button_pressed function 
-	# on a \"pressed\" signal event
-	return
-
-func _button_pressed() -> void:
-	# Simple syntax for changing scenes; removes the current nodes
-	# and draws the nodes of the new scene
-	print(\"button pressed calls\")
-	get_tree().change_scene(\"res://scenes/TutorialRoom.tscn\")
-"
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends Button
-# Button 1: navigates to an alternatie version of the hospital (trimmed down), specifically 
-# a trimmed down ROOM scene
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-# onready var button : Button = get_node(\"Tutorial\")
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	# Connecting the button object to call the _button_pressed function 
-	# on a \"pressed\" signal event
-	return
-
-func _button_pressed() -> void:
-	# Simple syntax for changing scenes; removes the current nodes
-	# and draws the nodes of the new scene
-	get_tree().change_scene(\"res://scenes/TutorialRoom.tscn\")
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
-
-[node name="Node2D" type="Node2D"]
+[node name="Title" type="Node2D"]
+pause_mode = 2
 script = SubResource( 5 )
+scene_type = "to_gameplay"
 
 [node name="WhiteBackground" type="Sprite" parent="."]
 position = Vector2( 510, 300 )
@@ -114,7 +74,7 @@ margin_right = 903.0
 margin_bottom = 277.0
 custom_colors/default_color = Color( 1, 0, 0, 1 )
 custom_fonts/normal_font = SubResource( 2 )
-text = "Brought to you by Xanmankey and Bananaman1_1"
+text = "				Can you escape financial ruin?"
 
 [node name="FirstAidCross" type="Sprite" parent="."]
 position = Vector2( 476, 447 )
@@ -131,9 +91,8 @@ theme = ExtResource( 6 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Start"
-script = SubResource( 3 )
 
-[node name="Tutorial" type="Button" parent="."]
+[node name="Settings" type="Button" parent="."]
 material = SubResource( 1 )
 margin_left = 186.0
 margin_top = 392.0
@@ -142,8 +101,20 @@ margin_bottom = 499.0
 theme = ExtResource( 6 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Tutorial"
-script = SubResource( 4 )
+text = "Settings"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="SettingsMenu" parent="." instance=ExtResource( 7 )]
+visible = false
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 16.0
+margin_bottom = 24.0
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
-[connection signal="pressed" from="Tutorial" to="." method="_on_Tutorial_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_Settings_pressed"]

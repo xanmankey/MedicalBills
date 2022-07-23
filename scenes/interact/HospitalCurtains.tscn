@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/art/interactive/interactive/hospitalCurtainsTeel.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/interactive/interactive/hospitalCurtainsTeelOpen.png" type="Texture" id=2]
+[ext_resource path="res://scenes/interact/HospitalCurtains.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 92.5, 85 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 80, 82.5 )
+
+[node name="HospitalCurtains" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="HospitalCurtainsTeel" type="Sprite" parent="Area2D"]
+position = Vector2( 195, 290 )
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="HospitalCurtainsTeelOpen" type="Sprite" parent="Area2D"]
+position = Vector2( 195, 290 )
+texture = ExtResource( 2 )
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 97.5, 290 )
+shape = SubResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/StaticBody2D"]
+position = Vector2( 100, 290 )
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]

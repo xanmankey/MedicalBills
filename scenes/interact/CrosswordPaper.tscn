@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/interact/FSCrosswordPuzzle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/interact/CrosswordPaper.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/interactive/interactive/written_paper_no_backgroundFLIPPED.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25, 25 )
+
+[node name="CrosswordPaper" type="Node2D"]
+position = Vector2( 620, 161 )
+script = ExtResource( 2 )
+
+[node name="CrosswordPuzzle" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 305, 276 )
+shape = SubResource( 1 )
+
+[node name="WrittenPaperNoBackgroundFlipped" type="Sprite" parent="Area2D"]
+position = Vector2( 305, 276 )
+texture = ExtResource( 3 )
+
+[connection signal="popup_hide" from="CrosswordPuzzle" to="." method="_on_CrosswordPuzzle_popup_hide"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
