@@ -1,0 +1,433 @@
+GODOT
+The 4 essential elements are as follows: 
+Scenes
+Nodes (objects in a scene)
+Scene tree (a collection of the scenes that make up a game)
+Signals (flags that indicate specific actions associated with specific nodes); remember to connect these to functions!
+
+NOTES TODO -> I plan on organizing this file into 6 main categories: Scenes, Nodes, Scene tree, Signals, best practices, and TODOS/IMPROVEMENTS. 
+(for now, I'm going to shift my focus to finishing, uploading, and sharing my game)
+
+CURRENT TODO
+Fix the animation (for some reason the player bed animation seems to be acting up)
+Finish player positioning (probably just use get the position2D node of the scene and set player position equal to that)
+Fix all the rest and test
+SFX
+
+BIG GODOT WISDOM
+Call down, signal up
+Signals should only "respond" to behavior, not START it
+Groups are VERY important for scalable games; they help reduce a lot of manual work (a group for doors, levels, ect. so on events you can compare based on naming convention, and execute code accordingly)
+Setget functions are useful for calling functionality (in particular, signaling) when a variable is changed or redefined. See an example below:
+var my_var = 0 setget setVar
+
+func setVar(new_var):
+    my_var = new_var
+    onVarChange()
+
+Saving is quite important, you'll probably want to come up w/ a plan for serializing and grouping data early on (a great resource can be found here: https://docs.godotengine.org/en/3.2/tutorials/io/saving_games.html. I tried using PackedScenes for my first game (https://godotengine.org/qa/89982/how-to-save-changes-when-switching-scenes), but it wasn't precise enough for me unfortunately).
+Persistence in scenes is something I struggled with (https://www.reddit.com/r/godot/comments/v3q6aq/how_do_i_stop_scenes_from_resetting_when_i_change/), but saving scene states is probably the best way to handle it. This is something that you should take care of EARLY ON.
+
+MY GODOT PLANNING
+Plan out basic scene structure (get an idea of what scenes & nodes are necessary)
+Add player interactivity + collisions
+Create and add the static objects
+Create basic scene structures
+Add "Event Bus" signal code (plan out signal structure, which lends to function structure and interactivity)
+Debug and search for glitches
+
+DEADLINE
+2 days (I want to get it submitted and posted before the end of the game jam)
+PSUEDOCODING
+debugging: why is my player moving? why are the buttons automatically being pressed (did solving the errors and reworking some of the button signals mess up the scene?)
+Each character needs a path and an enemy collider
+I need to make a ui timer (that goes down if enemy interaction or incorrect wire cut. Also, I might need to rework the tablet to reflect the wire order)
+
+
+TODO
+Fix guards glitching out
+Setup UI timer
+Figure out player bed
+Connect all the scenes well (I might want to remove the scenes from hallway, haven't tested with scene switcher yet) + fix door spawn positioning (currently I believe the nodes are getting the position for the previous room). I also need to figure out how to determine which player to spawn accordingly (also, do I need the player instance in EVERY scene?)
+Code light minigame + brightness stuff
+Code collision response for guards and hospital chars for player and player motor bed
+Plan to handle player + player bed: I'm going to make both of them autoload sprites that react to the spawn positions using signals somehow and have disable() and enable() functions respectively (when one is disabled, the other is enabled, and the only real differences are the speed and how they handle enemy collisions (the penalty is drastically reduced when you have the motor)) (but I'm handling that tomorrow). Also, can you enable or disable an autoload script? If that's the case, I can basically use that functionality in combination with the scene switcher to determine which player to use. Maybe there's a better way of handling multiple sprites though?
+EXPORT AND YOU'RE DONE! Post and share!
+
+
+TODO
+(currently taking it one scene at a time, doing the easy things; the player script is a mess, which makes it hard to debug; I need to figure that out (I don't think it's acceptable to handle anything OTHER than SIMPLE collisions on the player script, but I might need to indicate that they've occured... I'll figure it out through testing)
+Start debugging the room (https://docs.godotengine.org/en/stable/tutorials/scripting/debug/overview_of_debugging_tools.html), and once I get that all figured out (the full transitions), then I can start making the other rooms, which (hopefully) should be less code.
+10 USEFUL THINGS (https://www.youtube.com/watch?v=mwIkj3FfatQ); haven't watched, but seems like some useful stuff
+Figure out group functionality (in particular for collisions and interacting), seems like an OOP concept that could save time and effort (especially because groups extend between scenes)
+Finish creating scenes (specifically look into whether if you update a tilemap, you can apply the updates to already placed tiles; otherwise, COMPLETELY finish w/ the tilemaps before working on the scenes)
+I'm doing all my door logic manually for time's sake, but there's definitely a better way to handle doors
+Use TextureProgress (or something; I forgot what the node was called, but godot DOES have a progress bar node) for the timer and work on creating more of the ui (after the basic scenes)
+Figure out pathing and other functionality for enemy characters, test out collision (my goals for tomorrow; ideally, I can create the scenes during the trip?, and add functionality later on than that)
+I NEED TO REALLY GET MOVING; SUBMISSIONS CLOSE IN 8 DAYS!!! (https://itch.io/jams)
+Migrate to Godot 4.0 when done (it seems like there's a lot of big improvements, and I will wait on serious development until then I think)
+I have to figure out how I want to make a dynamic scene for minigames (I think it makes to code each one individually)
+Remember if you change scripts/change signals you may need to refactor code as well (I don't know how godot refactoring works just yet)
+Add second safe, finish rest of (simpler) scenes, get global functionality up and running
+
+MUSIC
+
+SFX
+
+(for all the stuff in the one gameplay room; the hallway room, light room, motor room, and cart room were all removed)
+
+TEST
+
+
+FINISHING THE GAME (adding the other scenes, hallway, guards, ect)
+
+LIGHTING
+
+MOTORBED PHYSICS
+
+ENEMY PATHING
+
+IMPROVEMENTS
+Learn to make more dynamic code
+Migrate away from Area2D's when possible for static objects (use "on-collision do this" + layers and masks functionality)
+I cut interacting with objects via input (instead, walking into an object triggers that action). This was mostly due to the way I was using input, and I didn't want to devise a multi-layered input system
+Currently just using a name for items, I also want a visualization eventually
+I gave up on the collision near the end, so there's some wonky things. I NEED to take the time to learn collsion layers and masks so I can (possibly) get away from Area2D issues (or at least solve those issues)
+Create my OWN movements next time (don't just use the ui buttons; I was on a time constraint)
+Look into PACKEDSCENES more (they seem quite useful; https://docs.godotengine.org/en/stable/classes/class_packedscene.html)
+There's a fair amount of repetitive coding; along with figuring out a better project organizational structure, I should look into templating w/ godot
+Figure out how to balance using autoloads and debugging single scenes simultaneously (it could get annoying real quick for a scalable project)
+
+GODOT BEST PRACTICES (https://docs.godotengine.org/en/stable/tutorials/best_practices/introduction_best_practices.html)
+
+1. Understanding OOP in Godot
+
+Scripts aren't classes, but rather resources that tell the engine a sequence of initializations to perform ON a class (which is basically what a resource is; if you have lots of export vars on a PackedScene, I think it's probably best to use a resource to handle them instead?)
+Scenes ARE objects, so many OOP concepts that apply to written code also apply to scenes (single responsibility, encapsulation, ect)
+
+2. Scene organization and effective relationships (which nodes? where should they go? how should they interact?)
+A problem many users experience is reusing scenes w/ absolute pathing, because paths don't find their targets and signals break. To fix these issues, one must instantiate the sub-scenes wo/ them requiring environmental details. One of the BIGGEST things to consider in OOP is maintaining focused, singular-purpose classes with loose coupling for reusability and maintainabilities sake. This OOP practice leads to a number of scene implications, including:
+* IF POSSIBLE, scenes should be designed to have NO dependencies (scenes that keep everything they need within themselves). Otherwise, Dependency injection should be used (signals in godot; connect to a signal, and signals should only be used to RESPOND to behavior, not to START it).
+
+USEFUL SYNTAX
+Use rand_range for randomization
+Use anim.playback_speed to increase or decrease animation speed
+
+THINGS I LEARNED
+PSEUDOCODING is the MOST IMPORTANT THING!!! Oh my gosh, it's so difficult without pseudocoding and pre-planning
+ORGANIZATION is the SECOND MOST IMPORTANT THING (and they kind of go hand-in-hand; there's just so many possible bugs to encounter)
+Use the debugger, and TEST IN CONTEXT (a scene might work standalone, but it may not work in the context of multiple scenes)
+There's a lot to learn for game design and development; you can't just throw yourself right into it unless you have an idea of WHAT you are doing and HOW you are going to do it (that means specifics, and based on this, I need to do more research; tutorials on 2D movement, collision, learning more nodes, animation, map creation, and more. A great tutorial for getting started was this though, which laid out a lot of the basics: https://www.youtube.com/watch?v=-4jEXTwTsVI&t=39s)
+When working with multiple interconnected scenes, it helps to work in the scene in which they are connected, because you will inevitably need to script there
+For smaller and simpler games, make the code simpler too! A global "Signal manager" class works amazingly to handle all signals. Because one of the goals of game design is to make things as easily scalable as possible, a global signal system is almost necessary so you can communicate between scenes.
+Animating static sprites is a great way to add life to your game (however, unless you want it to look weird, you will need 4 directions (for 2D, left, right, up, and down), which can be hard to find, so a pre-animated sprite might be a better idea)
+You can add a FULL SCENE to autoloads
+You DON'T want to create duplicate sprites but w/ one thing changed (which I did); instead, isolate into layers, that way you can reuse sprites and put sprites together, as well as reuse functionality
+Tilemaps are quite useful for decorative and other purposes (for ex. collision and fast-placing/node definition purposes (nodes are defined for the sprites in the tilemap)), but aren't great when it comes to unique interactivity and precise placement. Making tilemaps is definitely recommended though (however, if you want to resize something, you'll either need to use the godot scale feature (one time) or export a new resized sprite). Note that if you are going to attempt tilesets, you should implement the functionality of each tile BEFORE creating your levels. NOTE that if you are using collision with tilemaps, you'll probably need to use this setup in the scene you export: sprite => StaticBody2D => collision detection.
+Collision layers and masks are PIVOTAL for the godot collision system; a collision layer describes the layer an object appears in and a collision mask describes the layer the body will SCAN for collisions. 
+Remember that when adding a new resource to a node you can CLICK ON IT to edit it's properties
+You want to have as much control over switching scenes as possible (for adaptive audio, loading, cutscenes, animations, ect). A scene switcher is an optimized way to handle switching scenes
+Remember to debug and test constantly! The debugger and playing specific scenes is useful for this purpose
+It's important to minimize the amount of time you are working with other software (in particular, images). Try and use godot as much as possible (e.g. for flipping sprites, for animating, ect). Remember that you only want ONE sprite (you can incorporate the other sprites in it's animation, but that's all).
+Use TWEENS for dynamic animated objects and animation player for non-dynamic ones (if you're ok with absolute positioning; basically the rule I've found so far is animation => animation player, position change => tween)
+You DON'T need to animate rotations or positions; velocity and turning automatically does this for you in godot (a kinematic body 2d node actually MOVES the collision shape in addition to the sprite, so you don't need to animate collision either, you just need to set it initially).
+On the other hand, a RidgidBody2D node is GREAT for enemy characters, as it is entirely controlled by the physics engine (takes no input whatsoever)
+Sometimes, for simple animations, it's easier and more effective to just put them in code
+It makes sense to build scenes first, figure out the placement of obkects, and then animate them
+KEEP 2 versions of assets (in different directions), so you can easily animate without having to animate based on rotation
+Whenever you are structuring your node tree in scenes, always think about where the scripts are going to be going and what the best way to access them via pathing is (what makes the most sense)
+Godot CAN crop (I knew it!). I don't know how much cropping functionality it provides, but when working with a sprite sheet you can use the Vframes and Hframes to crop out other animations and sprites
+REALLY IMPORTANT (https://www.reddit.com/r/godot/comments/a7sno3/extracting_sprites_from_sprite_sheets/): this shows you how to work with sprite sheets, you just set them as the texture, go to texture region and select auto slice, and then click enabled under region and you can drag whatever texture/sprite you want from there
+The ColorRect node is useful for applying color backgrounds
+CenterContainer (just like ColorRect) is very useful for centering children
+Discard instancing w/ an instanced scene if you want to edit a node property for it
+Note that if you put a script on the root node, the script is also saved in the editor (I suppose), so you could apply the same script to multiple nodes via that method if desired???
+You can't store a function as an argument
+You can COMBINE staticBody2D and area2D to get more advanced collision detection/functionality
+Keep in mind that the scene file path is DIFFERENT from the tree (for example if you want to load a scene, you need to load the instance from the scene tree)
+As a general rule, nodes should MANAGE THEIR CHILDREN (not the other way around). You want to structure your project to AVOID get-node and get_parent calls, as they are frail and break easily. Instead, you CALL DOWN and SIGNAL UP!!! And using a COMMON PARENT to control these signals works great
+Note that Area2D doesn't provide BODY functionality (bodies provide a lot of funcitonality; if you need that functionality make sure to add a static, rigid, or kinematic depending; often rigid bodies mode static can provide alternatives to Area2D, so use that (remember that mode rigid = forces & gravity)). Also note that character rigid bodies have NO ROTATION. NEVER MIND, use get_overlapping_areas(), get_overlapping_bodies is for 3 obects (2 bodies and one area IN THE PARENT SCENE)
+When using the on_body_entered signal, remember that ANY body is included in that (so if you are using static collision, you may need to reorder, w/ your area2Ds encompassing your static bodies)
+For delaying code, OS.delay_msec can be used or a custom wait func + yield (which blocks code until a return value; I was struggling to get yield to work though (specifically w/ animations, I decideed to use the animation_finished signal instead)). Actually, godot does have official support with yield(get_tree().create_timer(1.0), "timeout"), so use that as well
+print_tree_pretty() is useful for examining code structure
+Make local + editable children is a powerful combo when used w/ instanced scenes
+Use set_process_unhandled_input(false) and set_process_input(false) + signals to disable a node from recieving _input when desired (and use true to re-enable input)
+The .propagate_call function is useful because it allows you to call a function from a parent sprite that calls on all children as well. It calls on ALL children though, including parents of children (otherwise, just use a simple iterator)
+Z-index manipulation is very useful for scene creation
+The User:// directory can be written to, while the res:// directory cannot (and is for static calls; use User:// for saves and settings and stuff)
+Tweens (Tween.new()) and the interpolate_property methods are very useful for creating simple automation functionality
+(tween ex: (node, property, value 1, value 2, duration, type (1 means wave), curve, other stuff??) -> tween.interpolate_property(audio_stream, "volume_db", -80, 0, 3, 1, Tween.EASE_IN, 0)
+Remember that if you have a moving body, it should be the root (or close to) the root node so other collision shapes (for ex. Area2Ds) can inherit the movement
+The Canvas Modulate node can be useful for imitating selections by glowing a wire or just $Sprite.modulate to tint the color of one sprite (and you can use self_modulate to ONLY change the one sprite if it has children)
+Remember if you update a tilemap to reload it in the scenes it was used for the new tiles you are placing to update
+I think that creating custom classes isn't that important with godot, because scenes can be instanced and edited so easily, and custom classes may have to account for different node structures. I think the best approach moving forward is to create "BASE" scenes that can easily be instanced and a number of properties changed as a method of OOP
+Every object should have a scene (if it has a natural name, it should have a scene).
+Scripts should be attached to root nodes only
+Don't use get_parent() or $.. (only call on nodes that exist in the current scene)
+Don't call code on nodes that aren't visible in the scene
+
+QUESTIONS AND ANSWERS
+Q: Can I apply one animation to a bunch of different sprites (for ex. walk)?
+A: You can apply an animation to a bunch of sprites by making them children and animating the parent. Should I animate the directional sprites seperately though?
+Q: Can you lock a collision shape 2D node to a sprite node (to make animations that change sprite position maintain correct collision)?
+A: KinematicBody2D essentially automates this, if you are using a KB2D you shouldn't need to worry about that, because the collision shape will move with your sprite (unless you are animating player position, in which case you will need to animate the collision shape as desired. So far animating position doesn't seem helpful though).
+Q: Can you apply an animation for one sprite onto another?
+A: Yes you can, all you have to do is 1. save your animations and then 2. load your animations in the new scene. Note that in order for the animations to work, the sprites will need to follow similar naming conventions (regardless of scene) in order for the correct nodes to be animated
+Q: What's the best way to handle multiple resolutions?
+A: This is a bit more of a complex question, and isn't really applicable for a first game jam game, but often the best strategy is to develop for the most common resolution of the people playing the game (your audience), and then account for stretching accordingly
+Q: More effectively working with the AnimatedSprite node? So far it seems really useful, but there's so much lacking functionality (look at Godot 4.0 plans)
+A: ???
+Q: If you add collision to a tilemap, can you apply that collision to already-placed tiles?
+A: It seems like you can, but I'm not sure how (it doesn't seem like the most user-friendly system in 3.x.x, so for now, make sure your tilemaps are complete before placing lots of tiles). Another issue is that you can't overwrite tilesets, you can only create new ones (which is kind of a pain when you use them in multiple scenes). For now, there's a lot about the tileset I'm unsure about and using inefficiently (I imagine you can treat it as a list and script accordingly to add functionality, but I'm going to wait until it's revamped to understand it)
+Q: Can you edit the children of an instanced scene independently?
+A: Yes, you just have to right click the scene and select "make local".
+Q: What's the best way to do doors?
+A: I like an Area2D + a specific input inside the Area2D
+Q: Is it best to put the script on the parent and then load children as necessary?
+A: Only if you KNOW you are going to be loading multiple children, otherwise put it on the necessary node and use global + self methods. Often, it's just EASIER to put the script on the parent
+
+GROUPS
+Useful for organizing nodes; if you add an object to a group and instance it in a scene, you can then add objects from the currently loaded scene to that group as well, and this scales. 
+Groups are very useful for working with collisions.
+Note that if you ARE using them for collisions, you want to add the base collider (kinematic, static, rigid) itself to the group, and then detect the collision using collision.collider.is_in_group("group_name").
+
+ERRORS
+"the function returns a value, but that value is never used": means the function returns an error that is left unhandled
+I was handling scene switching wrong (which explains a lot of the glitches I was experiencing; I was loading all scenes in TWICE. Instead, you just need to load them once, and only include the scenes that either are loaded via the switcher or is the main scene)
+
+
+SCENE EDITOR
+Use snapping for scene creation: click on use grid snap (shift + G), makes objects snap to grid
+Use the scale tool (hold shift for uniform scaling)
+I don't think you can actually move up and down; however, you can just move your mouse and zoom in and out at different points, which functions essentially the same way (FYI: you can probably do it w/ a mouse)
+Make sure to import your sprites as pixel art IF they're pixel art (select file => import => preset => 2d pixel)
+
+ERRORS
+"attempt to call function on null instance" means that you tried to get a node that didn't exist. An important thing to realize regarding these errors is that the tree that get_node starts from is dependent on the node your script is attached to
+
+PLUGINS
+To uninstall a plugin, just disable it, and then delete the folder from /assets/<plugin>
+
+SCENE ACTION
+
+GITHUB INTEGRATION
+Use the 3.1 version of the Github Integration plugin, otherwise extracting to the project directory won't work
+You can set up github integration using the Assetlib, and then by enabling it under project settings. Github integration allows you to connect godot to a repository (in particular, a branch), so that you can pull and push changes. If you want to checkout a branch, just use git checkout and then git pull to refresh and get the current information, and then us git merge to merge your current code (get updated files, update files according to local changes)
+Use git reset --hard to reset changes (specifically so you can pull over changes)
+Note that if you try to push the default res:// folder it will take a while for the gui to process
+To center an image in a scene, divide by half of the resolution for X and Y coords
+Backgrounds (the full size of the chosen resolution) are set to (0, 0)
+Note that github integration works better when combined w/ VSCode git management and when it's all on the top level of the branch
+
+USEFUL NODES AND PROPERTIES
+Node2D: root node for a 2D scene; autogenerated
+SpriteNodes: nodes for any sprite you create
+Button: node for a button
+Text: in order to get access to more text properties, you need to load a font first (found in /usr/share/fonts)
+Dynamic font: in order to use custom fonts, you have to create dynamic font objects (right click res folder and select new resource) and then load the font you want under font data
+Theme: A theme is for manipulating the style of an object (including background and other colors). See more here: https://docs.godotengine.org/en/stable/classes/class_theme.html
+Line edit: An input field for text
+Right click node and attach a script (if built-in script is on, you don't have to deal with pathing, but you can only edit the script in godot (which is fine for our purposes))
+Kinematic Body 2D: for characters that can move around and interact w/ physics objects (collision, motion, ect)
+Colliders (rectangle shape 2D, ellipse shape 2D, ect): for adding collision to a kinematic body 2D node
+
+GAME ART
+OpenGameArt is a great source (the biggest repository of free online game assets)
+.svg files are essentally tilesets, .tres files are theme files
+.ttf files are text files
+If you are going to make multiple sides of a static sprite (for ex. for 8 dimensional movement), you should really make sure they all have very similar dimensions, otherwise the collision is going to be frustrating
+If pixel art imports blurry, do 2 things under the import tab (note that the file itself needs to be selected to access the import tab): set the preset to 2D px, and if that doesn't work, disable the "Filter" flag
+
+PAUSE
+To pause the game, set get_tree().paused = true (this stops ALL nodes in the tree). To unpause, any node can set this to false, in which case the tree will resume.
+One important thing to note is to set the pause mode to PROCESS (so when the game is paused, everything EXCEPT that node will pause; in this case the pause menu; in the case of popup screens, I'm also using this functionality).
+Another important thing to note (if you are using a popup pause menu), is that you can't just make it visible, you need to cal the popup() function
+
+RESOURCES (fundamental concept explained here: https://docs.godotengine.org/en/stable/tutorials/scripting/resources.html)
+Nodes give you scalable and reusable functionality, but RESOURCES are data containers that nodes can use. Anything saved or loaded is a resource (scenes, sprites, ect)
+The load and preload functions are for loading resources (preload is a gdscript function for loading at compile time).
+Scenes saved to disk are resources of the type PackedScene. You can use PackedScene (a loaded scene/PackedScene resource).instance() and add it as a child of any other node to create new nodes in a scene efficiently (this is basically done in the editor anyway).
+Creating resources is a effective way of implementing OOP in your game.
+
+OOP IN GODOT (https://docs.godotengine.org/en/stable/tutorials/best_practices/what_are_godot_classes.html)
+
+
+GDSCRIPT
+First, if you want autocomplete, you have to enable it via projectSettings => debug => GDScript => autocomplete
+You extend base godot classes in godot to get functionality
+Button: extends Button, var button = Button.new()
+StyleBox: class for drawing stylized UI boxes (for example for buttons) dynamically
+(Use -> instead of the => in dart)
+Ctrl + k to comment out a line
+get_node("Sprite"): useful function for getting a node of the current scene (supports parents and child pathing)
+Create a node using <node>.new()
+add_child(): used for adding a created node as a child to the parent node (the node that holds the script object)
+queue_free(): deletes a node from memory
+Kinematic Body 2D: extends KinematicBody2D
+To hardcode a datatype, use var <name> : <datatype> = <val>
+Vector2(): an (x, y) datatype, holds position, rotation, scale, and direction info. For ex, Vector2.UP refers to the direction up.
+var sprite : Sprite = $Sprite ($ is syntax for getting a specific node from the scene tree, in this case, one named Sprite; just use the get_node() function instead, it's preferred)
+onready keyword: runs code AFTER the node has been initialized
+Input: a class for getting movement inputs (has properties such as Input.is_action_pressed(your value; for ex "move_left", "ui_left", or KEY_SPACE); Input.is_action_just_pressed calls every frame)
+move_and_slide(velocity, direction): a function that takes a velocity and direction; returns a new velocity value
+<Sprite>.flip_h: for flipping a sprite horizontally if directional movement changes
+CanvasLayer: the drawing layer (a script will extend this if you add a script to a scene node)
+Note that a script called global.gd can be used ANYWHERE (accessed with global.<property>)
+Use export syntax (for ex: export (String) var level_name = "level") to allow for UI-defined script variables (that get their values from a preset UI value)
+match statement (a switch-case in GDscript); _: is for the default case
+The tool keyword can be applied to the top of a GDscript file to make it run in the editor
+
+SIGNALS
+Can be connected via the editor, or, more dynamically, via code. Remember that any node can emit a signal, and that one node can be connected to MULTIPLE signals
+If you copy a node with a signal, you may need to disconnect and then reconnect for any changes to the node (for ex. renaming it) to take effect on the signal
+Note that signals themselves can take parameters (ex: signal attack(damage))
+Often signals take a reactive "event bus" format, where default signal connections are initialized in the scene itself and connected to one another via code (
+
+NAMING
+snake_case (for non-autoload file names)
+PaschalCase (for nodes)
+
+GLOBAL SIGNALS (EVENT BUS)
+To avoid confusing code, especially if you break down lots of code into reusable scenes (like godot is supposed to allow). However, you still need to CONNECT your signals in the file with the signal (don't forget!)
+
+PHYSICS
+ 
+
+INSTANCING SCENE
+Note that the main scene will appear blue in the Filesystem layout.
+Also note that you can control which scene is where via the Node2D Z-index property
+You can load a scene using load("scene"), or, alternatively, with GDScript you can use the preload("") function which loads scenes at compile time w/ GDScript
+Simple syntax for changing scenes: get_tree().change_scene("res://path/to/scene.tscn"). However, this AUTOMATICALLY changes a scene
+A better method would be to create a node scene as your root scene for switching scenes, have a parent node for the scenes to be loaded, add the main (first) scene onto the SceneSwitcher (the root node) and then dynamically load the rest from inputs. Note CanvasLayers can draw over anything, so they are QUITE USEFUL for UI
+Singleton/autoloads: storing values in a global script so that they can be accessed in every scene; not efficient or optimized, local storage is recommended (using some kind of a custom transfer data function) or save files (for bigger games).
+Rememeber to use a Node (not a 2D scene node) as the parent for the SceneSwitcher, because Node has extended functionality for all the classes
+Steps: load scene => instance loaded scene object => add instance to tree => remove prior instance and set new scene
+Understanding the scene tree is quite important to working with scene functionality in godot: https://docs.godotengine.org/en/latest/tutorials/scripting/scene_tree.html#becoming-active-by-entering-the-scene-tree
+Remember with the SceneSwitcher that because most of your scenes won't be able to be accessed using the get_current_scene() method, get the current_level var from the scene switcher and then get the desired node from that
+
+OOP
+Godot does support custom classes, I just haven't experimented w/ them yet.
+_init() can be used for creating a constructor
+
+OPTIMIZATIONS
+.free() and .queue_free() are great for memory and performance optimizations
+
+SCENE TRANSITIONS
+The AnimationPlayer node is useful for this
+ColorRect node can be useful for fade to black animations
+
+CONTROL/UI NODES + SETTINGS
+All user interfaces inherit from Control. When you want to create a settings scene, you use green (control) nodes.
+Grid containers are useful for row + column based layouts (which is useful for a settings menu)
+In my case, I'm using a Popup node for the settings menu (because it's a popup menu, just like the pause menu). Also, if you are using popups, make sure you are using CANVAS LAYERS so the popups draw on top of the rest of the screen
+Use a settings.ini file for saving settings; if you want to set up keybinds, you will probably need to create your own inputs. In my case, I'd like to keep support for controller or keyboard, so I'm not allowing keybinding. And remember, when creating a settings file, you CAN'T leave any syntax errors, otherwise the file won't load correctly in the editor
+You could use a temporary save file for sessions that you delete after play is over
+Use the ConfigFile class for working with .ini settings files (https://docs.godotengine.org/en/stable/classes/class_configfile.html)
+Note that res:// file path is only used for loading and working in the editor. For compiling, the User:// file path should be used (and use a .save file for saving your game settings).
+Also note that the Godot OS module is useful for settings (there are a couple parts to settings; an autoload file for handling the default settings, an autoload file for applying AND saving the settings (and possibly a WorldEnvironment scene if handling specific video qualities that OS doesn't cover), a script on the UI itself for calling the functions to update the settings, and the settings file itself (which is autogenerated))
+In order to edit the environment (non-OS settings; for example brightness. You'll probably want your own scene for the environment, extending from the WorldEnvironment node)
+Video/Visuals: OS + WorldEnvironment node (in a scene w/ an updating script)
+Audio: mess w/ the audio busses in the audio tab, and then select the desired bus depending on the audio source whenever audio is played via an AudioStreamPlayer node (note that audio buses share array indexing)
+When using world environments, note that Godot uses the environment ATTACHED TO THE CURRENT CAMERA!!! (so if nothing is happening, that would explain why)
+Note that you'll probably need to instance your settings menu on the default screen so your settings can be loaded properly
+Also note that an effective way to handle a pause menu is an autoload script that checks for input
+It can be useful to name your collision layers and masks (you can do that in settings => layer names => 2d physics; a great tutorial for collision is here: https://stackoverflow.com/questions/69728827/how-do-i-detect-collision-between-a-kinematicbody-2dplayer-node-and-a-rigidbod)
+
+SINGLETONS
+Useful for storing and transferring data between scenes. You can combine this with autoload scripts (project settings => autoload) to automatically run a script whenever ANY scene is loaded.
+The main functionality is that once you add a script to autoload and it becomes a singleton, you can access it in ANY SCRIPT (from my knowledge) by accessing it via the name used in autoload.
+Autoloading is EXTREMELY useful for audio, pause screens, ect
+
+MAKING ROOMS
+The Area2D is a useful note that registers collision objects
+The Tilemap node is SUPER useful; you can load a tilemap, which you can then use for advanced scene/level creation (you can even write scripts to edit the tiles themselves, for ex. placing detail on random tiles). Tilesets end w/ the .tres extension, and can be created via the filesystem by creating a new resource => Tileset => and then adding your desired textures to the tileset. Be warned that creating a tilemap in godot is currently a labourius process (you will probably have to jump from the inspector and back and to the scenes for testing, and to the original artwork for sizing, ect ect
+When using tilemaps, make sure to set snapping to the correct size of the tileset you are using (and be sure to turn snap off if you are doing fine detail when setting collisions)
+You can also create a tilemap by creating a scene and then converting it to a tileset
+Also, make sure to lock the tilemap node itself, so you don't accidentally select it
+If the drawing cell is bigger than the sprite itself, you can resize the cell via Cell => cell size
+Also, if you're having alignment issues with the tiles, try enabling "Centered Textures" on the tilemap
+And to scale a texture, change the scale property of the parent node (in my case, node2D) temporarily for placing the tile, then change it back
+NOTE: I realized that for a lot of assets you DON'T actually want a tilemap; it's very limiting (it's good for textures and decorative stuff, and it makes placement and automation (collision, interaction) easier for things occurring multiple times; however, you still need single images for all the assets, so it's not that big a loss of time for me). 
+To move tilemap tiles, select them using M and then use copy - paste (note that you do need to have the correct tilemap selected)
+Hold Ctrl + Shift to drag and drop areas of tiles. 
+
+THREADING
+Careful! Not all functionality is thread safe (godot has a list of what is and isn't)
+Mutexes: for accessing data from different threads
+Semaphores: threads that work ON receiving data
+
+ANIMATION (in particular, animating a static sprite)
+It's smart to seperate parts of an image by grabbing them from a texture region (make sure the region => enabled setting is checked) and having them act as individual parts for animation (for more complex animation; texture region is a part of the sprite node that can be selected (upon which you can upload a texture region, where you can select the desired sprite from)).
+Note that the AnimationPlayer node is a child of the sprite
+Also note that in order to animate texture regions the sprite MUST be selected AND you can't select the AnimationPlayer, but rather you need to select the docked animation tab at the bottom by the texture region
+Note that you CAN loop animations
+Another important thing to take into account is that if you edit position instead of editing offset, your node will use ABSOLUTE position instead of relative, meaning that the current position won't be taken into account.
+Use wrap loop interp to recalculate the values of the first keyframe (relative positioning)
+AnimationTree: node that blends and combines animations, often used for 3D games
+To do FRAME-BY-FRAME animation, just start with your base sprite, and then create a new automation where the "frame" property of the sprite is edited.
+Animated sprites don't even NEED an AnimationPlayer node! They just take a spritesheet (or sprites) as input and animate accordingly
+Currently for animations that animatedsprite doesn't handle correctly, I'm forced to use a manual workaround (found here: https://godotengine.org/qa/1680/animate-sprite-with-frames-of-varying-size, that + discrete animation playback)
+Remember that if your sprites aren't centered or sized evenely and are then imported into godot, animations might experience position shifts on rotation and other mishaps
+
+DEBUGGING
+Remote debugging is for debugging an already-compiled game. In-editor debugging is essentially the same. For both, note that the script debugger is probably what you will be using, where you can set break points and step into your code.
+
+DOORS
+For doors, I had an animatedsprite, so that made animation easy, and I instanced the scene whenever necessary, calling a door_opened signal whenever a door was passed through, which allowed my scene to call the level_changed signal accordingly
+For handling multiple possible scene transitions, I emit 2 signals; I handle the door_opened function using player position and emit a level_changed function accordingly based on the scene
+* Alternatively use a Position2D node for doors that DON'T take input (just collision); Area2D nodes will just result in the player triggering the door again -> infinite loop (for more info, see here: https://www.reddit.com/r/godot/comments/ixtv5d/multiple_entrances/)
+I find using a position2D for player spawns and then using it to dictate initial player position works quite well (Remember to use global_position for absolute transforms tho!)
+
+COLLISIONS
+for index in get_slide_count(): (cycles through all collisions)
+var collision = get_slide_collision(index) (create collision var)
+If the last parameter of move_and_slide is true, collisions w/ rigidbodies will be ignored (by default is false though)
+To filter collisions, you can use group functionality (add to group under node next to signal), node name functionality, or node type functionality.
+Note that in most games, collision scripts go on the player scene, but if you want to make the player code more efficient (for ex. in a bullethell), it makes sense to offload collision to other objects (like the enemies/bullets).
+Note that for collision calculations you'll probably want to use collision.collider.apply_central_impulse(-collision.normal * push) to push an object (where "push" is the player's inertia)
+One error that I made came regarding pushing the rollybed; I was applying impulse, but not animating properly, so the bed could be walked through but the physics object itself got moved. IMPORTANT: This stemmed from an error I was making; the COLLISION BODY should be the parent (in the case of everything but a static object at least, but it's good practice), so the sprite (a child) will also be impacted by the collision
+
+TWEENS
+Godot animations in-game (takes into account relative positions and game knowledge; for smoother animations?).
+
+CUTSCENES
+I imagine you can make them with tweens as well or via code, but for me the easy method seems to be to use the "call method" track on an Animation Player, so you can trigger animations accordingly
+(it may also make sense to handle cutscene audio IN the cutscene, depending on how you've structured audio)
+
+LIGHTING
+Canvas modulate can be used to make everything appear darker
+Light2D can be used for more advanced lighting techniques (treated similarly to collision layers and masks)
+
+CAMERA2D
+Camera nodes can be used to track player movement. Oftentimes the player and characters have their own scene, those scenes are then imported as nodes into other scenes, and then (often the main character scene) gets a camera2D node attached to it (which makes the camera follow it)
+With camera2Ds, you will need to enable the "current" checkbox for a camera to render
+Multiple cameras in a scene can be useful for setting up cutscenes and action shots
+Each camera comes with a deadzone, at which point the camera will scroll
+You don't necessarily need to attach a camera to the player permanatley; handling it on a scene-by-scene basis gives you a lot of freedom (remember to make your player local!)
+In order to see the drag margin (the box at which the camera will scroll when it overlaps the viewport), you will need to enable view drag margin
+If you don't want the camera to scroll a certain direction, set the limits to the screen minimum (for ex to rm vertical scroll on spawn, set top to -1 and bottom to 1)
+If you are using tilemaps, you can also use tilemaps (if the tilemap creates a rect around the level) to set the camera limits using $desired_tilemap.get_used_rect() (for ex. you can use the values from $tilemap.get_rect_size() and $tilemap.cell_size)
+
+EXPORTING
+Once you export each individually via godot, you can then use the "export all" feature if you make a change
+Often the default settings are good enough, just make sure you specify icons, bundle information (for mac), ect.
+
+SAVING AND UPDATING SCENES
+When interacting with a scene, changes will be made. At some point, it's ineffective to keep track of all of these changes manually.
+That's where the SceneState node comes in: https://docs.godotengine.org/en/stable/classes/class_scenestate.html.
+
+PATH2D AND PATHFOLLOW2D
+Great nodes for scripted pathing (for enemies, for ex). 
+Use the buttons to create points in space that your sprite can follow
+Node structure: Path2D -> PathFollow2D -> Sprite
+The offset is the distance along the path, the unit offset is the same thing, but normalized
+
+ERRORS
+See a list of errors under the enum Error at https://docs.godotengine.org/en/stable/classes/class_@globalscope.html
+
+IMPORTANT FUNCTIONS
+_process(): called every frame
+_physics_process(delta): called every physics frame (delta can be used for multiplication in gravity calculations to make them apply per second rather than per frame)
+_enter_tree(): when the node ENTERS the scene tree
+_ready(): when the node AND IT'S CHILDREN enter the scene tree (often used over enter_tree)
+_exit_tree(): opposite of _enter_tree
